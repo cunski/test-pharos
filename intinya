@@ -1,0 +1,81 @@
+# Foundry Testing & Debugging Tool
+
+## Struktur Repositori
+
+```
+foundry-testing-tool/
+├── contracts/        # Smart contracts to be tested
+│   ├── Example.sol   # Example smart contract
+├── test/             # Foundry test scripts
+│   ├── Example.t.sol # Test file for Example.sol
+├── scripts/          # Python automation scripts
+│   ├── testing_tool.py # Main testing script
+├── .gitignore        # Ignore unnecessary files
+├── README.md         # Documentation
+```
+
+## Deskripsi Skrip Testing
+
+### `scripts/testing_tool.py`
+Skrip ini menjalankan berbagai proses debugging dan optimasi pada smart contract menggunakan Foundry:
+
+- **Simulasi Transaksi** → `forge test`
+- **Snapshot Gas** → `forge snapshot`
+- **Fuzzing** → `forge test --fuzz-runs 1000`
+
+### Kode Skrip Testing (`scripts/testing_tool.py`)
+
+```python
+import subprocess
+
+def run_forge_tests():
+    """Run Foundry tests and return the results."""
+    result = subprocess.run(["forge", "test"], capture_output=True, text=True)
+    return result.stdout
+
+def run_gas_snapshot():
+    """Generate gas snapshots to analyze contract gas usage."""
+    result = subprocess.run(["forge", "snapshot"], capture_output=True, text=True)
+    return result.stdout
+
+def run_fuzzing():
+    """Execute fuzzing tests on smart contracts."""
+    result = subprocess.run(["forge", "test", "--fuzz-runs", "1000"], capture_output=True, text=True)
+    return result.stdout
+
+if __name__ == "__main__":
+    print("Running Foundry Testing & Debugging Tool...\n")
+    
+    print("--- Running Forge Tests ---")
+    print(run_forge_tests())
+    
+    print("--- Running Gas Snapshot ---")
+    print(run_gas_snapshot())
+    
+    print("--- Running Fuzzing Tests ---")
+    print(run_fuzzing())
+```
+
+## Cara Menggunakan
+
+1. **Clone Repository:**
+   ```bash
+   git clone https://github.com/username/foundry-testing-tool.git
+   cd foundry-testing-tool
+   ```
+2. **Pastikan Foundry Sudah Terinstall:**
+   ```bash
+   curl -L https://foundry.paradigm.xyz | bash
+   foundryup
+   ```
+3. **Jalankan Skrip Python:**
+   ```bash
+   python scripts/testing_tool.py
+   ```
+
+## Kontribusi
+Pull request dipersilakan! Pastikan untuk menulis tes yang relevan sebelum mengirimkan perubahan.
+
+---
+
+🚀 Semoga bermanfaat untuk debugging dan optimasi smart contract-mu!
